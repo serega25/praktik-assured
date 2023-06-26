@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                git 'https://https://github.com/serega25/praktik-assured'
+                git 'http://github.com/serega25/praktik-assured'
                 sh './mvnw clean compile'
             }
         }
