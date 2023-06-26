@@ -4,18 +4,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                git("https://github.com/serega25/praktik-assured") {
-                sh 'mvn -B -DskipTests clean package'
-                }
+                sh 'mvn clean install -DskipTests'
             }
         }
-     }
-    post {
-       always {
-          junit(
-        allowEmptyResults: true,
-        testResults: '*/test-reports/.xml'
-      )
-      }
-   }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+    }
 }
