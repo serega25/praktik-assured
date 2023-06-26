@@ -115,7 +115,7 @@ public class Praktikum {
                 .statusCode(201);
     }
 
-        @Test
+    @Test
     public void checkAvatarAndTest() {
         RestAssured.baseURI = "https://reqres.in/";
         Response response = given()
@@ -134,6 +134,7 @@ public class Praktikum {
             Assert.assertNotNull(avatar, "Значение аватара равно null");
         }
     }
+
     @Test
     public void checkAvatarAndTests() {
         Response response = given()
@@ -150,7 +151,7 @@ public class Praktikum {
         for (String avatar : avatars) {
             Assert.assertEquals(true, avatar != null);
         }
-   }
+    }
 
     @Test
     public void checkAvatar() {
@@ -161,5 +162,26 @@ public class Praktikum {
                 .get("api/users?page=2")
                 .then().log().all()
                 .extract().body().jsonPath().get("data");
+    }
+
+    @Test
+    public void newCheckAvatar() {
+        RestAssured.baseURI = "https://reqres.in/";
+        Response response = given()
+                .when()
+                .contentType(ContentType.JSON)
+                .get("api/users?page=2")
+                .then()
+                .extract().response();
+
+        List<String> avatars = response.jsonPath().getList("data.avatar");
+
+        // Дальше можно добавить необходимые проверки
+        // Например, можно проверить, что список avatars не пустой и содержит корректные URL-адреса аватаров.
+
+        Assert.assertFalse(avatars.isEmpty());
+        for (String avatar : avatars) {
+            Assert.assertTrue(avatar.matches("^https?://.*$"));
+        }
     }
 }
