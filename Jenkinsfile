@@ -5,12 +5,13 @@ pipeline {
         stage('Build') {
             steps {
                 git 'http://github.com/serega25/praktik-assured'
-                sh './mvnw clean compile'
+                bat 'mvn clean compile'
+
             }
         }
         stage('Test') {
             steps {
-                sh './mvnw test'
+                bat './mvnw test'
             }
 
             post {
