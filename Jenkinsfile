@@ -5,16 +5,11 @@ pipeline {
         stage('Build') {
             steps {
                 git 'http://github.com/serega25/praktik-assured'
-                bat 'mvn clean compile'
+                bat 'mvn clean test'
 
             }
         }
-        stage('Test') {
-            steps {
-                bat './mvnw test'
-            }
-
-            post {
+    post {
                 always {
                     junit '**/target/surefire-reports/TEST-*.xml'
                 }
