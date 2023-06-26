@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 git 'http://github.com/serega25/praktik-assured'
-                bat 'mvn -Dmaven.test.failure.ignore=true install'
+                bat 'mvn -maven.test.failure.ignore=true install'
             }
         }
         post {
